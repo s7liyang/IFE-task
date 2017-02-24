@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>01自定义网页右键菜单</title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			#box{
+				width: 400px;
+				height: 200px;
+				background-color: #EEEEEE;
+				text-align: center;
+				line-height: 200px;
+				color: #3C3C3C;
+			}
+			#menu{
+				position: absolute;
+				display: none;
+				width: 100px;
+				height: 100px;
+				background-color: #CCCCCC;
+				border: 1px solid sienna;
+			}
+			#menu li{
+				list-style: none;
+				height: 25%;
+				text-align: center;
+			}
+			#menu li:hover{
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			自定义网页右键菜单区域
+		</div>
+		<ul id="menu">
+			<li>1.菜单选项</li>
+			<li>2.菜单选项</li>
+			<li>3.菜单选项</li>
+			<li>4.菜单选项</li>
+		</ul>
+	</body>
+	<script type="text/javascript">
+		var 
+			box = document.getElementById("box"),
+			menu = document.getElementById("menu");
+			
+		box.oncontextmenu = function(e) {
+			e.preventDefault();
+			console.log(e.clientX,e.clientX);
+			menu.style.left = e.clientX+"px";
+            menu.style.top = e.clientY+"px";
+    		menu.style.display = 'block';
+    	}
+		menu.oncontextmenu = function(e){
+		    return false;
+		}
+		document.onclick = function(e){
+		    menu.style.display = 'none'
+		}
+	</script>
+</html>
