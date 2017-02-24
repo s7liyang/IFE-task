@@ -9,11 +9,11 @@
 				margin: 0;
 			}
 			#box{
-				width: 400px;
-				height: 200px;
+				width: 500px;
+				height: 300px;
 				background-color: #EEEEEE;
 				text-align: center;
-				line-height: 200px;
+				line-height: 300px;
 				color: #3C3C3C;
 			}
 			#menu{
@@ -23,6 +23,7 @@
 				height: 100px;
 				background-color: #CCCCCC;
 				border: 1px solid sienna;
+				box-sizing: border-box;
 			}
 			#menu li{
 				list-style: none;
@@ -36,7 +37,7 @@
 	</head>
 	<body>
 		<div id="box">
-			自定义网页右键菜单区域
+			自定义菜单
 		</div>
 		<ul id="menu">
 			<li>1.菜单选项</li>
@@ -48,16 +49,36 @@
 	<script type="text/javascript">
 		var 
 			box = document.getElementById("box"),
-			menu = document.getElementById("menu");
+			menu = document.getElementById("menu"),
+			lis = document.getElementsByTagName("li");
 			
 		box.oncontextmenu = function(e) {
 			e.preventDefault();
-			console.log(e.clientX,e.clientX);
-			menu.style.left = e.clientX+"px";
-            menu.style.top = e.clientY+"px";
+			if (box.offsetHeight-e.clientY>menu.offsetHeight) {
+				if (box.offsetWidth-e.clientX>menu.offsetWidth) {
+					menu.style.left = e.clientX+"px";
+            		menu.style.top = e.clientY+"px";
+				} else{
+					menu.style.left = e.clientX-menu.offsetWidth+"px";
+            		menu.style.top = e.clientY+"px";
+				}
+			} else{
+				if (box.offsetWidth-e.clientX>menu.offsetWidth) {
+					menu.style.left = e.clientX+"px";
+            		menu.style.top = e.clientY-menu.offsetHeight+"px";
+				} else{
+					menu.style.left = e.clientX-menu.offsetWidth+"px";
+            		menu.style.top = e.clientY-menu.offsetHeight+"px";
+				}
+			}
     		menu.style.display = 'block';
     	}
-		menu.oncontextmenu = function(e){
+		for (var i= 0,len =lis.length;i<len;i++) {
+			lis[i].onclick = function(e){
+		    	alert(this.innerHTML)
+			}
+		}
+		document.oncontextmenu = function(e){
 		    return false;
 		}
 		document.onclick = function(e){
