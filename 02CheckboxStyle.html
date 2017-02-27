@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>02自定义checkbox， radio样式</title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			div{
+				width: 200px;
+				margin: auto;
+				margin-top: 10px;
+			}
+			.radiobox input,.checkbox input{
+				display: none;
+			}
+			.radiobox label{
+				display: inline-block;
+				border-radius: 50%;
+				margin-right: 7px;
+				cursor: pointer;
+			}
+			.radiobox .normal{
+				width: 14px;
+				height: 14px;
+				border: 1px solid #d8d8d8;
+			}
+			.radiobox .active{
+				width: 16px;
+				height: 16px;
+				background:url(img/bg02-1.jpg) no-repeat;
+			}
+			
+			.checkbox label{
+				display: inline-block;
+				margin-right: 10px;
+				cursor: pointer;
+			}
+			.checkbox .normal{
+				width: 12px;
+				height: 12px;
+				border: 1px solid #d8d8d8;
+			}
+			.checkbox .active{
+				width: 14px;
+				height: 14px;
+				background:url(img/bg02-2.jpg) no-repeat;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			图片：
+			<img src="img/02input.jpg"/>
+		</div>
+		<div class="radiobox">
+			实现：<br /><br /><br />
+			<input type="radio" name="sex" id="male"/>
+			<label class="normal"  for="male"></label>
+			<input type="radio" name="sex" id="female" checked="checked"/>
+			<label class="normal" for="female"></label>
+		</div>
+		<div class="checkbox">
+			<input type="checkbox" name="hobby" id="sports"/>
+			<label class="normal" for="sports"></label>
+			<input type="checkbox" name="hobby" id="music" checked="checked"/>
+			<label class="normal" for="music"></label>
+		</div>
+		<script type="text/javascript">
+			var 
+				inputs = document.getElementsByTagName("input"),
+				labels = document.getElementsByTagName("label");
+				
+			addclass();
+			for (var i=0,len=inputs.length;i<len;i++) {
+				inputs[i].onchange = function(){
+					addclass();
+				}
+			}
+			function addclass(){
+				for (var n=0,len=inputs.length;n<len;n++) {
+					if (inputs[n].checked) {
+						labels[n].className = 'active'; 
+					} else{
+						labels[n].className = 'normal';
+					}
+				}
+			}
+		</script>
+	</body>
+</html>
